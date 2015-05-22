@@ -16,7 +16,7 @@ from netkraken import (settings,
                        get_stage_filename,
                        get_final_filename,
                        makedirs)
-from netkraken.countdb import CountDB
+from counterdb import CountDB
 
 
 class Fetcher(object):
