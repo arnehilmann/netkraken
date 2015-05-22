@@ -23,7 +23,7 @@ class NetKrakenTests(unittest.TestCase):
         current_timestrings.return_value = self.current_timestrings
         popen.return_value = MagicMock()
         popen.return_value.communicate = MagicMock(name="communicate")
-        popen.return_value.communicate.return_value = ("""State      Recv-Q Send-Q                   Local Address:Port                       Peer Address:Port
+        popen.return_value.communicate.return_value = (b"""State      Recv-Q Send-Q                   Local Address:Port                       Peer Address:Port
 LISTEN     0      80                           localhost:mysql                                 *:*
 LISTEN     0      128                          localhost:4243                                  *:*
 LISTEN     0      128                                  *:ssh                                   *:*
