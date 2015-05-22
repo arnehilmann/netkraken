@@ -63,8 +63,7 @@ class Aggregator(object):
     def aggregate(self):
         for filename in sorted(glob.glob(os.path.join(settings["stagedir"], "*")), key=len, reverse=True):
             level, timestamp = get_timestamp(filename)
-            higher_level, higher_timestamp = get_higher_timestamp(filename)
-            print("stage: %s [%s] -> %s [%s]" % (filename, level, higher_timestamp, higher_level))
+            print("stage: %s [%s]" % (filename, level))
 
             if self.is_current(level, timestamp):
                 print("\tis current, ignoring for now")
@@ -73,6 +72,11 @@ class Aggregator(object):
             if self.is_too_old(level, timestamp):
                 print("\ttoo old, ignoring")
                 self.remove(filename)
+                continue
+
+            higher_level, higher_timestamp = get_higher_timestamp(filename)
+            print("\thigher level: %s [%s]" % (higher_timestamp, higher_level))
+            if not higher_level:
                 continue
 
             if self.is_finalized(higher_timestamp):
