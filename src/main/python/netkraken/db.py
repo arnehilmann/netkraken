@@ -28,7 +28,7 @@ class Fetcher(object):
             ssp = subprocess.Popen(["ss", "-t4ar"], stdout=subprocess.PIPE)
             stdout, _ = ssp.communicate()
             listening = set()
-            for line in stdout.splitlines()[2:]:
+            for line in stdout.splitlines()[1:]:
                 state, recv, send, local, foreign = line.split()
                 local_host, local_port = local.split(b':')
                 if state == "LISTEN":
