@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 from __future__ import division
 
-from datetime import datetime
 import json
-import os
 import sys
 
 from netkraken import makedirs
@@ -89,7 +87,8 @@ class CountDB(object):
 
     def persist(self):
         if self.mode == "readonly":
-            raise Exception("countdb not opened for modifications (consider using open_for_counting or open_for_extending)")
+            raise Exception("countdb not opened for modifications "
+                            "(consider using open_for_counting or open_for_extending)")
         makedirs(self.filename)
         with open(self.filename, "w") as data_file:
             json.dump({"data": self.data, "counter": self.counter}, data_file, indent=4)
@@ -100,4 +99,3 @@ class CountDB(object):
         with open(final_filename, "w") as final_file:
             json.dump(self.convert_to_relative(), final_file)
             final_file.write("\n")
-
