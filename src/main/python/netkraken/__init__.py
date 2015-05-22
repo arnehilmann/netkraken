@@ -72,11 +72,3 @@ def get_higher_timestamp(filename_or_timestamp):
             last_level = level
     return (None, None)
     # raise Exception("cannot determine higher timestamp of %s" % timestamp_string)
-
-
-def makedirs(filename):
-    try:
-        os.makedirs(os.path.dirname(filename))
-    except OSError as e:
-        if e.errno != 17:
-            raise
