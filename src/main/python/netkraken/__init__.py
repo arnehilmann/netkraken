@@ -17,8 +17,12 @@ thresholds = {
     "minute": timedelta(minutes=60)}
 
 
+def get_current_datetime():
+    return datetime.now()
+
+
 def get_current_timestrings():
-    now = datetime.now()
+    now = get_current_datetime()
     tmp = {}
     for key, format in formats.items():
         tmp[key] = now.strftime(format)
