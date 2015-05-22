@@ -2,9 +2,8 @@
 from __future__ import division
 
 import json
+import os
 import sys
-
-from netkraken import makedirs
 
 
 class CountDB(object):
@@ -99,3 +98,15 @@ class CountDB(object):
         with open(final_filename, "w") as final_file:
             json.dump(self.convert_to_relative(), final_file)
             final_file.write("\n")
+
+    @staticmethod
+    def _open_file(filename, mode="r"):
+        return open(filename, mode)
+
+
+def makedirs(filename):
+    try:
+        os.makedirs(os.path.dirname(filename))
+    except OSError as e:
+        if e.errno != 17:
+            raise
