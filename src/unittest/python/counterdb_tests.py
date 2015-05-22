@@ -2,6 +2,7 @@ from __future__ import print_function
 
 import unittest
 from mock import patch
+import io
 
 from counterdb import CountDB
 
@@ -23,8 +24,7 @@ class CountDBTests(unittest.TestCase):
         result = cdb.convert_to_relative()
         self.assertDictEqual({"foo": 21.0}, result)
 
-        import StringIO
-        output = StringIO.StringIO()
+        output = io.StringIO()
         cdb.dump(stream=output)
         self.assertEquals("foo 21.000\n", output.getvalue())
 
