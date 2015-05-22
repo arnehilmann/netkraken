@@ -43,7 +43,7 @@ class CountDB(object):
         self.mode = "readonly"
 
     def load(self):
-        with open(self.filename) as data_file:
+        with self._open_file(self.filename) as data_file:
             tmp = json.load(data_file)
             self.data = tmp.get("data", {})
             self.counter = tmp.get("counter", 0)
@@ -89,13 +89,13 @@ class CountDB(object):
             raise Exception("countdb not opened for modifications "
                             "(consider using open_for_counting or open_for_extending)")
         makedirs(self.filename)
-        with open(self.filename, "w") as data_file:
+        with self._open_file(self.filename, "w") as data_file:
             json.dump({"data": self.data, "counter": self.counter}, data_file, indent=4)
             data_file.write("\n")
 
     def finalize(self, final_filename):
         makedirs(final_filename)
-        with open(final_filename, "w") as final_file:
+        with self._open_file(final_filename, "w") as final_file:
             json.dump(self.convert_to_relative(), final_file)
             final_file.write("\n")
 
