@@ -76,27 +76,3 @@ def makedirs(filename):
     except OSError as e:
         if e.errno != 17:
             raise
-
-
-
-
-
-
-
-def calc_actual_filename():
-    hour, minute = calc_actual_time()
-    return os.path.join(settings["prefix"], hour, minute)
-
-
-def calc_actual_dirname():
-    hour, _ = calc_actual_time()
-    return os.path.join(settings["prefix"], hour)
-
-
-def calc_previous_hour():
-    one_hour_back = timedelta(hours=-1)
-    hour = datetime.now() + one_hour_back
-    return hour.strftime(HOUR_FORMAT)
-
-def calc_filename(hour):
-    return os.path.join(settings["prefix"], hour)
