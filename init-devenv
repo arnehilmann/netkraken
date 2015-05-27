@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e -E -u
+
+case $(lsb_release -is) in
+    ManjaroLinux)
+        virtualenv venv
+        set +u
+        source venv/bin/activate
+        set -u
+        pip install pybuilder
+        pyb install_dependencies
+        (cd venv/bin; ln -sf ../../src/main/scripts/* .)
+        (cd venv/lib/python*/site-packages; ln -sf ../../../../src/main/python/* .)
+        ;;
+esac
