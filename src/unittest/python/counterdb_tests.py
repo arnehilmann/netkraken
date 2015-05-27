@@ -5,6 +5,7 @@ from mock import patch
 import io
 
 from counterdb import CountDB
+from testhelper import myAssertDictEqual
 
 
 class CountDBTests(unittest.TestCase):
@@ -22,7 +23,7 @@ class CountDBTests(unittest.TestCase):
         countdb_mock.return_value = self.dummy_countdb
         cdb = CountDB.open("///dummy///")
         result = cdb.convert_to_relative()
-        self.assertDictEqual({"foo": 21.0}, result)
+        myAssertDictEqual({"foo": 21.0}, result)
 
         try:
             io.StringIO().write("test")
@@ -35,14 +36,14 @@ class CountDBTests(unittest.TestCase):
     def test_counting(self):
         cdb = CountDB.open_for_counting("///unused///")
         cdb.count("bar")
-        self.assertDictEqual({"bar": 1.0}, cdb.convert_to_relative())
+        myAssertDictEqual({"bar": 1.0}, cdb.convert_to_relative())
         self.assertRaises(Exception, cdb.extend, CountDB("///unusedtoo///"))
 
     def test_extending(self):
         cdb = CountDB.open_for_extending("///unused///")
         self.assertRaises(Exception, cdb.count, "bar")
         cdb.extend(self.dummy_countdb)
-        self.assertDictEqual({"foo": 21.0}, cdb.convert_to_relative())
+        myAssertDictEqual({"foo": 21.0}, cdb.convert_to_relative())
 
 
 if __name__ == "__main__":

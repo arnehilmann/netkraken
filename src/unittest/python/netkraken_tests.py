@@ -6,6 +6,7 @@ import unittest
 from mock import patch
 
 import netkraken
+from testhelper import myAssertDictEqual
 
 
 class NetKrakenTests(unittest.TestCase):
@@ -26,8 +27,10 @@ class NetKrakenTests(unittest.TestCase):
     @patch("netkraken.get_current_datetime")
     def test_get_current_timestrings(self, now_mock):
         now_mock.return_value = datetime(2042, 12, 12, 12, 12)
-        self.assertDictEqual({'day': '2042-12-12', 'hour': '2042-12-12T12', 'minute': '2042-12-12T12:12'},
-                             netkraken.get_current_timestrings())
+        # self.assertDictEqual({'day': '2042-12-12', 'hour': '2042-12-12T12', 'minute': '2042-12-12T12:12'},
+                             # netkraken.get_current_timestrings())
+        myAssertDictEqual({'day': '2042-12-12', 'hour': '2042-12-12T12', 'minute': '2042-12-12T12:12'},
+                               netkraken.get_current_timestrings())
 
 
 if __name__ == "__main__":
