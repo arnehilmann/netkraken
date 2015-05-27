@@ -10,6 +10,6 @@ install:
   - pip install pybuilder
   - pip install coveralls
   - pyb install_dependencies
-script: "pyb -X"
+script: "pyb -X && PYTHONPATH=src/main/python src/main/scripts/analyze"
 after_success:
   - coveralls --verbose
