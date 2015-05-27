@@ -48,7 +48,7 @@ class Fetcher(object):
                 if source_host.startswith(b"localhost") and target_host.startswith(b"localhost"):
                     continue
                 connection = b" ".join((source_host, target_host, target_port))
-                db.count(connection.decode(encoding='UTF-8'))
+                db.count(connection.decode('UTF-8'))
 
     def dump(self):
         with CountDB.open(self.filename) as db:
