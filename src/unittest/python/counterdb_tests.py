@@ -24,7 +24,11 @@ class CountDBTests(unittest.TestCase):
         result = cdb.convert_to_relative()
         self.assertDictEqual({"foo": 21.0}, result)
 
-        output = io.BytesIO()
+        try:
+            io.StringIO().write("test")
+            output = io.StringIO()
+        except TypeError as e:
+            output = io.BytesIO()
         cdb.dump(stream=output)
         self.assertEquals("foo 21.000\n", output.getvalue())
 
