@@ -96,7 +96,7 @@ class CountDB(object):
     def finalize(self, final_filename):
         makedirs(final_filename)
         with self._open_file(final_filename, "w") as final_file:
-            json.dump(self.convert_to_relative(), final_file)
+            json.dump(self.convert_to_relative(), final_file, indent=4)
             final_file.write("\n")
 
     @staticmethod

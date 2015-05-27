@@ -99,7 +99,9 @@ class Aggregator(object):
         print("\tfinalize %s -> %s" % (filename, final_filename))
         # use finalize() on CountDB
         makedirs(final_filename)
-        shutil.move(filename, final_filename)
+        # shutil.move(filename, final_filename)
+        with CountDB.open(filename) as db:
+            db.finalize(final_filename)
 
     def aggregate_file(self, filename, timestamp):
         higher_stage_filename = get_stage_filename(timestamp)
